@@ -4,6 +4,14 @@
 
 This package was created by forking Josh Baker's [Lotsa](https://github.com/tidwall/lotsa) framework.
 
+## Install
+
+```
+go get -u github.com/arjunsk/lotsaa
+```
+
+## Example
+
 To run the operations spread over 4 threads for a fixed duration, use `lotsa.Time`
 
 ```go
@@ -29,11 +37,6 @@ Prints:
 
 Lotsa is a simple Go library for executing lots of operations spread over any number of threads.
 
-## Install
-
-```
-go get -u github.com/tidwall/lotsa
-```
 
 ## Example
 
