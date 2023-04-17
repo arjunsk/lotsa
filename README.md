@@ -53,7 +53,14 @@ Prints:
 654,330 ops over 4 threads in 24ms, 27,207,775/sec, 36 ns/op
 ```
 
+**NOTE 1**: The ops differ between `lotsaa.Time` and `lotsaa.Ops` because, `lotsaa.Time` internally uses a counter to 
+keep track of number of operations executed, and the latter doesn't. Hence, latter is showing higher ops. Hence, latter
+can only be used for relative comparisons.
 
+**NOTE 2**:
+This will be useful for benchmarking **ephemeral** data structures like Cache 
+(maybe a combination of [btree](https://github.com/tidwall/btree) + [hwt](https://github.com/RussellLuo/timingwheel)), 
+where we can measure the overall read throughput (OPS) when all the interfering operations (`Reads`, `Writes`, and `Prunes`) act.
 
 ## License
 
