@@ -53,7 +53,7 @@ Prints:
 654,330 ops over 4 threads in 24ms, 27,207,775/sec, 36 ns/op
 ```
 
-**NOTE 1**: The ops differ between `lotsaa.Time` and `lotsaa.Ops` because, `lotsaa.Time` internally uses a counter to 
+**NOTE 1**: The `ops metrics` differ between `lotsaa.Time` and `lotsaa.Ops` because, `lotsaa.Time` internally uses a counter to 
 keep track of number of operations executed, and the latter doesn't. Hence, latter is showing higher ops. Hence, latter
 can only be used for relative comparisons.
 
