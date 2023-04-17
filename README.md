@@ -54,7 +54,7 @@ Prints:
 ```
 
 **NOTE 1**: The `ops metrics` differ between `lotsaa.Time` and `lotsaa.Ops` because, `lotsaa.Time` internally uses a counter to 
-keep track of number of operations executed, and the latter doesn't. Hence, latter is showing higher ops. Hence, latter
+keep track of number of operations executed, and the latter doesn't. So, latter is showing higher ops. Hence, latter
 can only be used for relative comparisons.
 
 **NOTE 2**:
