@@ -1,8 +1,10 @@
 # lotsaa
 
-`Lotsaa` = `Lotsa` + `a` fixed duration feature
+`Lotsaa` = `Lotsa` + `a` fixed duration execution
 
 This package was created by forking Josh Baker's [Lotsa](https://github.com/tidwall/lotsa) framework.
+
+`Lotsaa` supports executing an operation on several threads for i) Fixed Operation Count ii) Fixed Duration.
 
 ## Install
 
@@ -10,14 +12,35 @@ This package was created by forking Josh Baker's [Lotsa](https://github.com/tidw
 go get -u github.com/arjunsk/lotsaa
 ```
 
-## Example
+## Example 1
 
-To run the operations spread over 4 threads for a fixed duration, use `lotsa.Time`
+To run 1,000,000 operations spread over 4 threads, use `lotsaa.Ops`
 
 ```go
 var total int64
-lotsa.Output = os.Stdout
-lotsa.Time(23 * time.Millisecond, 4,
+lotsaa.Output = os.Stdout
+lotsaa.Ops(1000000, 4,
+    func(i, thread int) {
+        atomic.AddInt64(&total, 1)
+    },
+)
+println(total)
+```
+
+Prints:
+
+```
+1,000,000 ops over 4 threads in 23ms, 43,580,037/sec, 22 ns/op
+```
+
+## Example 2
+
+To run an operation spread over 4 threads for a fixed duration, use `lotsaa.Time`
+
+```go
+var total int64
+lotsaa.Output = os.Stdout
+lotsaa.Time(23 * time.Millisecond, 4,
     func(_ *rand.Rand, thread int) {
         atomic.AddInt64(&total, 1)
     },
@@ -30,51 +53,7 @@ Prints:
 654,330 ops over 4 threads in 24ms, 27,207,775/sec, 36 ns/op
 ```
 
----
 
-
-# lotsa
-
-Lotsa is a simple Go library for executing lots of operations spread over any number of threads.
-
-
-## Example
-
-Here we load 1,000,000 operations spread over 4 threads.
-
-```go
-var total int64
-lotsa.Ops(1000000, 4,
-    func(i, thread int) {
-        atomic.AddInt64(&total, 1)
-    },
-)
-println(total)
-```
-
-Prints `1000000`
-
-To output some benchmarking results, set the `lotsa.Output` prior to calling `lotsa.Ops`
-
-```go
-var total int64
-lotsa.Output = os.Stdout
-lotsa.Ops(1000000, 4,
-    func(i, thread int) {
-        atomic.AddInt64(&total, 1)
-    },
-)
-```
-
-Prints: 
-
-```
-1,000,000 ops over 4 threads in 23ms, 43,580,037/sec, 22 ns/op
-```
-
-## Contact
-
-Josh Baker [@tidwall](http://twitter.com/tidwall)
 
 ## License
 
